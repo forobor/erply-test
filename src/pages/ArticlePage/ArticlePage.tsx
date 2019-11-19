@@ -4,7 +4,7 @@ import { NewsComponent } from "../../components";
 import { News } from "../../models/News";
 
 interface Props {
-	news: News;
+	news: News.Article;
 }
 
 const ArticlePage: React.FC<Props> = ({ news }) => {

@@ -1,11 +1,13 @@
 .news {
 	background: white;
 	padding-top: 10px;
+	padding-bottom: 10px;
+
 }
 
 .text {
   padding: 0 20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .author-time {
@@ -14,15 +16,19 @@
 	margin-bottom: 10px;
 }
 
+.author {
+	margin-right: 20px;
+}
+
 .time {
-	margin-left: 20px;
 	color: gray;
 	font-size: 14px;
 }
 
 .image {
-	height: 250px;
+	height: 300px;
 	width: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
 }
