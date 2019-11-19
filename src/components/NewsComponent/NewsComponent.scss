@@ -1,0 +1,28 @@
+.news {
+	background: white;
+	padding-top: 10px;
+}
+
+.text {
+  padding: 0 20px;
+  margin-bottom: 10px;
+}
+
+.author-time {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.time {
+	margin-left: 20px;
+	color: gray;
+	font-size: 14px;
+}
+
+.image {
+	height: 250px;
+	width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
