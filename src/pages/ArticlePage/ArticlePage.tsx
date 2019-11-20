@@ -1,18 +1,18 @@
 import React from "react";
 import './ArticlePage.scss'
 import { NewsComponent } from "../../components";
-import { News } from "../../models/News";
+import { Location } from "history";
 
 interface Props {
-	news: News.Article;
+	location: Location
 }
 
-const ArticlePage: React.FC<Props> = ({ news }) => {
+const ArticlePage: React.FC<Props> = ({ location: { state: { article} } }) => {
 	return (
 		<div className="page">
 			<div className="content-article">
-				<NewsComponent {...news} />
-				<div className="content-text">{news.content}</div>
+				<NewsComponent {...article} />
+				<div className="content-text">{article.content}</div>
 			</div>
 		</div>
 	);

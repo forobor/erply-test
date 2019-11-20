@@ -7,9 +7,20 @@
   right: 0;
   align-self: center;
   margin-bottom: 25px;
+  display: flex;
+
+  button {
+    width: 60px;
+  }
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .news-container {
   margin-bottom: 20px;
   width: 640px;
+  cursor: pointer;
 }

@@ -15,10 +15,13 @@
   div {
     width: 250px;
     text-align: center;
-    cursor: pointer;
     &:hover {
       font-weight: bolder;
+    }
 
+    a {
+      color: black;
+      text-decoration: none;
     }
   }
 }

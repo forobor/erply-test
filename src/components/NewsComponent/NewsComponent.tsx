@@ -1,4 +1,5 @@
 import React from "react";
+import moment from 'moment';
 import "./NewsComponent.scss";
 import { News } from "../../models/News";
 
@@ -8,7 +9,6 @@ const NewsComponent: React.FC<Props> = ({
 	author,
 	title,
 	description,
-	url,
 	urlToImage,
 	publishedAt
 }) => {
@@ -17,7 +17,7 @@ const NewsComponent: React.FC<Props> = ({
 			<div className="text">
 				<div className="author-time">
 					{author && <div className="author">{author}</div>}
-					<div className="time">{publishedAt}</div>
+					<div className="time">{moment(publishedAt).format('Do MMM YYYY')}</div>
 				</div>
 				<h3 className="title">{title}</h3>
 				<div className="description">{description}</div>

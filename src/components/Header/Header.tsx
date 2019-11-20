@@ -1,6 +1,8 @@
 import React from "react";
 import "./Header.scss";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
+
 interface Props {}
 
 const Header: React.FC<Props> = () => {
@@ -16,8 +18,12 @@ const Header: React.FC<Props> = () => {
 				)
 			}
 		>
-			<div>News Page</div>
-			<div>Profile</div>
+			<div>
+				<Link to="/">News Page</Link>
+			</div>
+			<div>
+				<Link to="/profile">Profile</Link>
+			</div>
 		</div>
 	);
 };

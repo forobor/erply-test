@@ -64,10 +64,12 @@ export const newsReducer = (
 
 export const fetchNews = async (
 	dispatch: Dispatch<Action>,
-	apiToken: Auth.State["apiToken"]
+	apiToken: Auth.State["apiToken"],
+	query?: string
 ) => {
+	const url = query ? `${NEWS_URL}q=${query}&apiKey=${apiToken}` : `${NEWS_URL}apiKey=${apiToken}`
 	dispatch(newsLoading(true));
-	fetch(`${NEWS_URL}${apiToken}`)
+	fetch(`${url}`)
 		.then((response) => {
 			// TODO: show error
 			if (response.status !== 200) throw Error("error");
