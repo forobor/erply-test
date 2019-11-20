@@ -7,12 +7,12 @@ export namespace News {
 		status: "ok" | "error" | null;
 		error: any | null;
 		articles: Article[];
-  }
-  
-  export interface Context {
-    state: News.State;
+	}
+
+	export interface Context {
+		state: News.State;
 		dispatch: Dispatch<Action>;
-  }
+	}
 
 	export interface Article {
 		source: {
@@ -26,5 +26,11 @@ export namespace News {
 		urlToImage: string;
 		publishedAt: string;
 		content: string;
+	}
+
+	export interface ServerData {
+		status: State["status"];
+		totalResults: number;
+		articles: Article[];
 	}
 }

@@ -1,4 +1,5 @@
-import { NEWS_URL } from "./../../config/constants";
+import { customFetch } from "./../middleware/api";
+import { NEWS_URL_TOP, NEWS_URL_QUERY } from "./../../config/constants";
 import { Action } from "../../models/types.d";
 import { News } from "../../models/News";
 import { Dispatch } from "react";
@@ -26,7 +27,7 @@ export const newsLoadingFailure = (error: any) => ({
 	error
 });
 
-export const newsLoadingSucceed = (news: News.State) => ({
+export const newsLoadingSucceed = (news: News.ServerData) => ({
 	type: NEWS_FETCH_SUCCESS,
 	data: {
 		status: news.status,
@@ -64,21 +65,10 @@ export const newsReducer = (
 
 export const fetchNews = async (
 	dispatch: Dispatch<Action>,
-	apiToken: Auth.State["apiToken"],
 	query?: string
 ) => {
-	const url = query
-		? `${NEWS_URL}?q=${query}&apiKey=${apiToken}`
-		: `${NEWS_URL}?apiKey=${apiToken}`;
-	dispatch(newsLoading(true));
-	fetch(`${url}`)
-		.then((response) => {
-			// TODO: show error
-			if (response.status !== 200) throw Error("error");
-			dispatch(newsLoading(false));
-			return response;
-		})
-		.then((response) => response.json())
-		.then((news) => dispatch(newsLoadingSucceed(news)))
-		.catch((error) => dispatch(newsLoadingFailure(error)));
+	const url = query ? `${NEWS_URL_QUERY}?q=${query}` : `${NEWS_URL_TOP}`;
+	customFetch(url)
+		.then((news: News.ServerData) => dispatch(newsLoadingSucceed(news)))
+		.catch((error: Error) => dispatch(newsLoadingFailure(error)));
 };

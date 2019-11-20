@@ -18,7 +18,7 @@ const MainPage: React.FC<Props> = () => {
 
 	useEffect(
 		() => {
-			fetchNews(dispatch, apiToken);
+			fetchNews(dispatch);
 		},
 		[ dispatch, apiToken ]
 	);
@@ -28,7 +28,7 @@ const MainPage: React.FC<Props> = () => {
 	};
 
 	const searchWithQuery = () => {
-		fetchNews(dispatch, apiToken, search);
+		fetchNews(dispatch, search);
 	};
 
 	return (
