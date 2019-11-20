@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./MainPage.scss";
 import { News } from "../../models/News";
 import { NewsComponent } from "../../components";
@@ -15,6 +15,13 @@ const MainPage: React.FC<Props> = () => {
 	const { state: { apiToken } } = useContext(AuthContext);
 	const [ search, setSearch ] = useState<string>();
 	const history = useHistory();
+
+	useEffect(
+		() => {
+			fetchNews(dispatch, apiToken);
+		},
+		[ dispatch, apiToken ]
+	);
 
 	const navigateToArticle = (article: News.Article) => {
 		history.push("/article", { article });

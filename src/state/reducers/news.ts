@@ -67,7 +67,9 @@ export const fetchNews = async (
 	apiToken: Auth.State["apiToken"],
 	query?: string
 ) => {
-	const url = query ? `${NEWS_URL}q=${query}&apiKey=${apiToken}` : `${NEWS_URL}apiKey=${apiToken}`
+	const url = query
+		? `${NEWS_URL}?q=${query}&apiKey=${apiToken}`
+		: `${NEWS_URL}?apiKey=${apiToken}`;
 	dispatch(newsLoading(true));
 	fetch(`${url}`)
 		.then((response) => {
