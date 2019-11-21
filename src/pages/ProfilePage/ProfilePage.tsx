@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useCallback } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./ProfilePage.scss";
 import { AuthContext } from "../../state/contexts/AuthContext";
 import { submitData, simulateLoad } from "../../state/reducers/auth";
@@ -16,8 +16,9 @@ const ProfilePage: React.FC<Props> = () => {
 
 	const [ showSaved, setShowSaved ] = useState<boolean>(false);
 
-	const initialSetUp = useCallback(
+	useEffect(
 		() => {
+			dispatch(simulateLoad(true));
 			const timeOut = setTimeout(() => {
 				dispatch(simulateLoad(false));
 				setName(stateName || "");
@@ -31,13 +32,7 @@ const ProfilePage: React.FC<Props> = () => {
 		[ dispatch, stateName, stateEmail, stateApiToken ]
 	);
 
-	useEffect(() => {
-		dispatch(simulateLoad(true));
-		initialSetUp();
-	}, [dispatch]);
-
 	const saveChanges = () => {
-		setShowSaved(false);
 		dispatch(simulateLoad(true));
 		const timeOut = setTimeout(() => {
 			dispatch(simulateLoad(false));
