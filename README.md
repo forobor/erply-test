@@ -3,10 +3,10 @@
 
 ### Used technologies:
 
-⋅⋅* React
-⋅⋅* React Hooks
-⋅⋅* SCSS
-⋅⋅* News API
+- React
+- React Hooks
+- SCSS
+- News API
 
 ### To start:
 
