@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch } from "react-router-dom";
-import "./App.css";
 import { LoginPage, MainPage, ArticlePage, ProfilePage } from "./pages";
 import { Header, MessagePopup, ProtectedRoute, Loading } from "./components";
 import AuthContextProvider from "./state/contexts/AuthContext";

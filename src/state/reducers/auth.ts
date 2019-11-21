@@ -34,11 +34,8 @@ export const loginSucceed = () => {
 	};
 };
 
-export const loginFailed = (error: string) => ({
+export const loginFailed = () => ({
 	type: LOGIN_FAILURE,
-	data: {
-		error
-	}
 });
 
 export const authReducer = (

@@ -34,7 +34,7 @@ const LoginPage: React.FC<Props> = () => {
 				authDispatch(loginSucceed());
 			}
 			if (status === "error") {
-				authDispatch(loginFailed("Auth error"));
+				authDispatch(loginFailed());
 			}
 		},
 		[ status, authDispatch ]
