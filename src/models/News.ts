@@ -5,7 +5,7 @@ export namespace News {
 	export interface State {
 		isFetching: boolean;
 		status: "ok" | "error" | null;
-		error: any | null;
+		error: ServerError | null;
 		articles: Article[];
 	}
 
@@ -32,5 +32,11 @@ export namespace News {
 		status: State["status"];
 		totalResults: number;
 		articles: Article[];
+	}
+
+	export interface ServerError {
+		status: "error",
+		code: string,
+		message: string
 	}
 }

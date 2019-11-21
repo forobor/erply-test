@@ -6,13 +6,11 @@ import { NewsContext } from "../../state/contexts/NewsContext";
 import { useHistory } from "react-router";
 import searchIcon from "../../assets/search.png";
 import { fetchNews } from "../../state/reducers/news";
-import { AuthContext } from "../../state/contexts/AuthContext";
 
 interface Props {}
 
 const MainPage: React.FC<Props> = () => {
 	const { state: { articles }, dispatch } = useContext(NewsContext);
-	const { state: { apiToken } } = useContext(AuthContext);
 	const [ search, setSearch ] = useState<string>();
 	const history = useHistory();
 
@@ -20,7 +18,7 @@ const MainPage: React.FC<Props> = () => {
 		() => {
 			fetchNews(dispatch);
 		},
-		[ dispatch, apiToken ]
+		[ dispatch ]
 	);
 
 	const navigateToArticle = (article: News.Article) => {

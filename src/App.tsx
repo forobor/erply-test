@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
 import { LoginPage, MainPage, ArticlePage, ProfilePage } from "./pages";
-import { Header } from "./components";
+import { Header, MessagePopup } from "./components";
 import AuthContextProvider from "./state/contexts/AuthContext";
 import NewsContextProvider from "./state/contexts/NewsContext";
 
@@ -11,6 +11,7 @@ const App: React.FC = () => {
 		<AuthContextProvider>
 			<NewsContextProvider>
 				<React.Fragment>
+					<MessagePopup />
 					<Header />
 					<Switch>
 						<Route exact path="/" component={MainPage} />

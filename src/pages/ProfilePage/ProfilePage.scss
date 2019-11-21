@@ -1,29 +1,36 @@
 @import '../../style/mixins.scss';
 
-
-
 .content-profile {
-  width: 640px;
-  background-color: white;
-  padding: 0 10%;
-  box-sizing: border-box;
+	width: 640px;
+	background-color: white;
+	padding: 0 10%;
+	box-sizing: border-box;
 
-  input {
-    @include input;
-    margin-bottom: 20px;
-  }
+	input {
+		@include input;
+		margin-bottom: 20px;
+	}
 
-  label {
-    font-weight: bolder;
-  }
+	label {
+		font-weight: bolder;
+	}
 
-  .button-container {
-    display: flex;
-    justify-content: center;
-    margin: 30px 0;
-  }
+	.button-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin: 30px 0;
+	}
 
+	.saved-success {
+		color: green;
+		&-hidden {
+			visibility: hidden;
+		}
+	}
+
+	.profile-button {
+		margin-top: 10px;
+	}
 }
-
-
-

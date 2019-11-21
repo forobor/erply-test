@@ -24,8 +24,7 @@ export const customFetch = (url: string, method?: string, data?: any): any => {
 							console.log("Some error occured");
 							break;
 					}
-
-					reject(response);
+					response.json().then((error) => reject(error));
 				}
 			})
 			.catch((error) => {

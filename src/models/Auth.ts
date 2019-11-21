@@ -5,14 +5,16 @@ export namespace Auth {
 	export interface State {
 		isLogged: boolean;
 		isLogging: boolean;
+
+		name: string | null;
 		email: string | null;
 		apiToken: string | null;
 
 		error: any | null;
-  }
-  
-  export interface Context {
-    state: Auth.State;
+	}
+
+	export interface Context {
+		state: Auth.State;
 		dispatch: Dispatch<Action>;
-  }
+	}
 }

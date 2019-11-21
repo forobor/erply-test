@@ -17,11 +17,9 @@ const LoginPage: React.FC<Props> = () => {
 
 	const submitLogin = () => {
 		authDispatch(loginSucceed(email, token));
-		fetchNews(newsDispatch, token);
-		if (status === 'ok') {
+		fetchNews(newsDispatch);
+		if (status === "ok") {
 			history.push("/");
-		} else {
-			alert('Wrong token!')
 		}
 	};
 
