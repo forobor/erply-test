@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import "./MessagePopup.scss";
 import { NewsContext } from "../../state/contexts/NewsContext";
 import { resetError } from "../../state/reducers/news";
@@ -9,10 +9,13 @@ const MessagePopup: React.FC<Props> = () => {
 	const { state: { error }, dispatch } = useContext(NewsContext);
 	const [ showError, setShowError ] = useState<boolean>(false);
 
-	const cleanUpError = () => {
-		setShowError(false);
-		dispatch(resetError());
-	};
+	const cleanUpError = useCallback(
+		() => {
+			setShowError(false);
+			dispatch(resetError());
+		},
+		[ dispatch ]
+	);
 
 	useEffect(
 		() => {
@@ -24,7 +27,7 @@ const MessagePopup: React.FC<Props> = () => {
 				clearTimeout(timeout);
 			};
 		},
-		[ error ]
+		[ error, cleanUpError ]
 	);
 
 	if (showError && error) {
