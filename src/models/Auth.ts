@@ -4,7 +4,7 @@ import { Action } from "./types";
 export namespace Auth {
 	export interface State {
 		isLogged: boolean;
-		isLogging: boolean;
+		isSimulating: boolean;
 
 		name: string | null;
 		email: string | null;

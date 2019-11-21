@@ -1,6 +1,7 @@
 import { Action } from "../../models/types.d";
 import { Auth } from "../../models/Auth";
 
+const SIMULATE = "SIMULATE"
 const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 const LOGIN_FAILURE = "LOGIN_FAILURE";
 
@@ -8,12 +9,19 @@ const SUBMIT_DATA = "SUBMIT_DATA";
 
 export const authInitialState: Auth.State = {
 	isLogged: false,
-	isLogging: false,
+	isSimulating: false,
 	name: null,
 	email: null,
 	apiToken: null,
 	error: null
 };
+
+export const simulateLoad = (value: boolean) => ({
+	type: SIMULATE,
+	data: {
+		value
+	}
+})
 
 export const submitData = (
 	name: Auth.State["name"],
@@ -43,6 +51,11 @@ export const authReducer = (
 	action: Action = {}
 ): Auth.State => {
 	switch (action.type) {
+		case SIMULATE:
+			return {
+				...state,
+				isSimulating: action.data.value
+			}
 		case LOGIN_SUCCESS:
 			return {
 				...state,

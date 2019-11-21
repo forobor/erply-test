@@ -1,7 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import "./ProfilePage.scss";
 import { AuthContext } from "../../state/contexts/AuthContext";
-import { submitData } from "../../state/reducers/auth";
+import { submitData, simulateLoad } from "../../state/reducers/auth";
 
 interface Props {}
 
@@ -16,18 +16,38 @@ const ProfilePage: React.FC<Props> = () => {
 
 	const [ showSaved, setShowSaved ] = useState<boolean>(false);
 
-	useEffect(
+	const initialSetUp = useCallback(
 		() => {
-			setName(stateName || "");
-			setEmail(stateEmail || "");
-			setApiToken(stateApiToken || "");
+			const timeOut = setTimeout(() => {
+				dispatch(simulateLoad(false));
+				setName(stateName || "");
+				setEmail(stateEmail || "");
+				setApiToken(stateApiToken || "");
+			}, 500);
+			return () => {
+				clearTimeout(timeOut);
+			};
 		},
-		[ stateName, stateEmail, stateApiToken ]
+		[ dispatch, stateName, stateEmail, stateApiToken ]
 	);
 
+	useEffect(() => {
+		dispatch(simulateLoad(true));
+		initialSetUp();
+	}, [dispatch]);
+
 	const saveChanges = () => {
-		dispatch(submitData(name, email, apiToken));
-		setShowSaved(true);
+		setShowSaved(false);
+		dispatch(simulateLoad(true));
+		const timeOut = setTimeout(() => {
+			dispatch(simulateLoad(false));
+			dispatch(submitData(name, email, apiToken));
+			setShowSaved(true);
+		}, 500);
+
+		return () => {
+			clearTimeout(timeOut);
+		};
 	};
 
 	return (
