@@ -3,6 +3,7 @@ import { NEWS_URL_TOP, NEWS_URL_QUERY } from "./../../config/constants";
 import { Action } from "../../models/types.d";
 import { News } from "../../models/News";
 import { Dispatch } from "react";
+import { Auth } from "../../models/Auth";
 
 const NEWS_FETCH = "NEWS_FETCH";
 const NEWS_FETCH_SUCCESS = "NEWS_FETCH_SUCCESS";
@@ -73,9 +74,9 @@ export const newsReducer = (
 	}
 };
 
-export const fetchNews = async (dispatch: Dispatch<Action>, query?: string) => {
+export const fetchNews = async (dispatch: Dispatch<Action>, apiKey: Auth.State["apiToken"], query?: string) => {
 	const url = query ? `${NEWS_URL_QUERY}?q=${query}` : `${NEWS_URL_TOP}`;
-	customFetch(url)
+	customFetch(url, apiKey)
 		.then((news: News.ServerData) => dispatch(newsLoadingSucceed(news)))
 		.catch((error: News.ServerError) => dispatch(newsLoadingFailure(error)));
 };

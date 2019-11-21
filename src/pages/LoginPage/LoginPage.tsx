@@ -1,33 +1,55 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, SyntheticEvent, useEffect } from "react";
 import "./LoginPage.scss";
 import { AuthContext } from "../../state/contexts/AuthContext";
-import { loginSucceed } from "../../state/reducers/auth";
-import { useHistory } from "react-router";
+import {
+	loginSucceed,
+	loginFailed,
+	submitData
+} from "../../state/reducers/auth";
 import { fetchNews } from "../../state/reducers/news";
 import { NewsContext } from "../../state/contexts/NewsContext";
 
 interface Props {}
 
 const LoginPage: React.FC<Props> = () => {
-	const { dispatch: authDispatch } = useContext(AuthContext);
+	const { state: { apiToken }, dispatch: authDispatch } = useContext(
+		AuthContext
+	);
 	const { state: { status }, dispatch: newsDispatch } = useContext(NewsContext);
-	const history = useHistory();
 	const [ email, setEmail ] = useState<string>("");
 	const [ token, setToken ] = useState<string>("");
 
-	const submitLogin = () => {
-		authDispatch(loginSucceed(email, token));
-		fetchNews(newsDispatch);
-		if (status === "ok") {
-			history.push("/");
-		}
+	useEffect(
+		() => {
+			if (apiToken) {
+				fetchNews(newsDispatch, apiToken);
+			}
+		},
+		[ apiToken, newsDispatch ]
+	);
+
+	useEffect(
+		() => {
+			if (status === "ok") {
+				authDispatch(loginSucceed());
+			}
+			if (status === "error") {
+				authDispatch(loginFailed("Auth error"));
+			}
+		},
+		[ status, authDispatch ]
+	);
+
+	const submitLogin = (event: SyntheticEvent) => {
+		authDispatch(submitData("", email, token));
+		event.preventDefault();
 	};
 
 	return (
 		<div className="login-page">
 			<div className="form-container">
 				<h1> Log in</h1>
-				<div className="login-form">
+				<form className="login-form" onSubmit={submitLogin}>
 					<div className="input-container">
 						<input
 							placeholder="Email Address"
@@ -52,8 +74,8 @@ const LoginPage: React.FC<Props> = () => {
 							here
 						</a>
 					</div>
-					<button onClick={submitLogin}>Login</button>
-				</div>
+					<button>Login</button>
+				</form>
 			</div>
 		</div>
 	);

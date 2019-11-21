@@ -24,7 +24,7 @@ const MessagePopup: React.FC<Props> = () => {
 				clearTimeout(timeout);
 			};
 		},
-		[ error, cleanUpError ]
+		[ error ]
 	);
 
 	if (showError && error) {

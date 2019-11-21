@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./ProfilePage.scss";
 import { AuthContext } from "../../state/contexts/AuthContext";
-import { submitChanges } from "../../state/reducers/auth";
+import { submitData } from "../../state/reducers/auth";
 
 interface Props {}
 
@@ -26,7 +26,7 @@ const ProfilePage: React.FC<Props> = () => {
 	);
 
 	const saveChanges = () => {
-		dispatch(submitChanges(name, email, apiToken));
+		dispatch(submitData(name, email, apiToken));
 		setShowSaved(true);
 	};
 

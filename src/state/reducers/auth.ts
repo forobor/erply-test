@@ -1,11 +1,10 @@
 import { Action } from "../../models/types.d";
 import { Auth } from "../../models/Auth";
 
-const LOGIN = "LOGIN";
 const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-const SUBMIT_CHANGES = "SUBMIT_CHANGES";
+const SUBMIT_DATA = "SUBMIT_DATA";
 
 export const authInitialState: Auth.State = {
 	isLogged: false,
@@ -16,12 +15,12 @@ export const authInitialState: Auth.State = {
 	error: null
 };
 
-export const submitChanges = (
+export const submitData = (
 	name: Auth.State["name"],
 	email: Auth.State["email"],
 	apiToken: Auth.State["apiToken"]
 ) => ({
-	type: SUBMIT_CHANGES,
+	type: SUBMIT_DATA,
 	data: {
 		name,
 		email,
@@ -29,14 +28,16 @@ export const submitChanges = (
 	}
 });
 
-export const loginSucceed = (
-	email: Auth.State["email"],
-	apiToken: Auth.State["apiToken"]
-) => ({
-	type: LOGIN_SUCCESS,
+export const loginSucceed = () => {
+	return {
+		type: LOGIN_SUCCESS
+	};
+};
+
+export const loginFailed = (error: string) => ({
+	type: LOGIN_FAILURE,
 	data: {
-		email,
-		apiToken
+		error
 	}
 });
 
@@ -45,20 +46,12 @@ export const authReducer = (
 	action: Action = {}
 ): Auth.State => {
 	switch (action.type) {
-		case LOGIN:
-			return {
-				...state,
-				isLogging: true
-			};
 		case LOGIN_SUCCESS:
 			return {
 				...state,
-				isLogging: false,
 				isLogged: true,
-				email: action.data.email,
-				apiToken: action.data.apiToken
 			};
-		case SUBMIT_CHANGES:
+		case SUBMIT_DATA:
 			return {
 				...state,
 				name: action.data.name,
@@ -68,8 +61,10 @@ export const authReducer = (
 		case LOGIN_FAILURE:
 			return {
 				...state,
-				isLogging: false,
-				error: action.error
+				isLogged: false,
+				name: null,
+				email: null,
+				apiToken: null,
 			};
 		default:
 			return state;
