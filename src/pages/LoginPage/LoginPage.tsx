@@ -76,6 +76,7 @@ const LoginPage: React.FC<Props> = () => {
 					</div>
 					<button>Login</button>
 				</form>
+				<div className="powered">Powered by News API</div>
 			</div>
 		</div>
 	);

@@ -35,8 +35,8 @@
 }
 
 .input-container {
-  width: 250px;
-  margin-bottom: 25px;
+	width: 250px;
+	margin-bottom: 25px;
 }
 
 input {
@@ -48,4 +48,10 @@ input {
 	margin-bottom: 40px;
 }
 
-
+.powered {
+	margin-top: 30px;
+	color: lightgray;
+	display: flex;
+	justify-content: center;
+	font-size: 12px;
+}
