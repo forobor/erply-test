@@ -13,7 +13,7 @@ const ProtectedRoute: React.FC<Props> = ({ login, ...rest }) => {
 		return isLogged ? (
 			<Redirect
 				to={{
-					pathname: "/"
+					pathname: "/main"
 				}}
 			/>
 		) : (
@@ -27,7 +27,7 @@ const ProtectedRoute: React.FC<Props> = ({ login, ...rest }) => {
 	return (
 		<Redirect
 			to={{
-				pathname: "/login"
+				pathname: "/"
 			}}
 		/>
 	);

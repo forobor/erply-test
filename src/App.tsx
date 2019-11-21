@@ -14,8 +14,8 @@ const App: React.FC = () => {
 					<Loading />
 					<Header />
 					<Switch>
-						<ProtectedRoute exact path="/" component={MainPage} />
-						<ProtectedRoute login path="/login" component={LoginPage} />
+						<ProtectedRoute login exact path="/" component={LoginPage} />
+						<ProtectedRoute path="/main" component={MainPage} />
 						<ProtectedRoute path="/article" component={ArticlePage} />
 						<ProtectedRoute path="/profile" component={ProfilePage} />
 					</Switch>

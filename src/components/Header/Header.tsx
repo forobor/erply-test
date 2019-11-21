@@ -11,7 +11,7 @@ const Header: React.FC<Props> = () => {
 	return (
 		<div
 			className={
-				history.location.pathname === "/login" ? (
+				history.location.pathname === "/" ? (
 					"header header-login"
 				) : (
 					"header"
@@ -19,7 +19,7 @@ const Header: React.FC<Props> = () => {
 			}
 		>
 			<div>
-				<Link to="/">News Page</Link>
+				<Link to="/main">News Page</Link>
 			</div>
 			<div>
 				<Link to="/profile">Profile</Link>
