@@ -7,6 +7,7 @@ export namespace News {
 		status: "ok" | "error" | null;
 		error: ServerError | null;
 		articles: Article[];
+		searhQuery: string | null
 	}
 
 	export interface Context {

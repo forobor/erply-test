@@ -11,11 +11,14 @@ const NEWS_FETCH_FAILURE = "NEWS_FETCH_FAILURE";
 
 const NEWS_RESET_ERROR = "NEWS_RESET_ERROR";
 
+const NEWS_SAVE_QUERY = "NEWS_SAVE_QUERY";
+
 export const newsInitialState: News.State = {
 	isFetching: false,
 	status: null,
 	articles: [],
-	error: null
+	error: null,
+	searhQuery: null
 };
 
 export const newsLoading = () => ({
@@ -37,6 +40,13 @@ export const newsLoadingSucceed = (news: News.ServerData) => ({
 
 export const resetError = () => ({
 	type: NEWS_RESET_ERROR
+});
+
+const saveQuery = (searhQuery: string | null) => ({
+	type: NEWS_SAVE_QUERY,
+	data: {
+		searhQuery
+	}
 });
 
 export const newsReducer = (
@@ -64,6 +74,11 @@ export const newsReducer = (
 				status: action.error.status,
 				error: action.error
 			};
+		case NEWS_SAVE_QUERY:
+			return {
+				...state,
+				searhQuery: action.data.searhQuery
+			};
 		case NEWS_RESET_ERROR:
 			return {
 				...state,
@@ -74,9 +89,14 @@ export const newsReducer = (
 	}
 };
 
-export const fetchNews = async (dispatch: Dispatch<Action>, apiKey: Auth.State["apiToken"], query?: string) => {
+export const fetchNews = async (
+	dispatch: Dispatch<Action>,
+	apiKey: Auth.State["apiToken"],
+	query?: string
+) => {
 	const url = query ? `${NEWS_URL_QUERY}?q=${query}` : `${NEWS_URL_TOP}`;
 	dispatch(newsLoading());
+	query ? dispatch(saveQuery(query)) : dispatch(saveQuery(null));
 	customFetch(url, apiKey)
 		.then((news: News.ServerData) => dispatch(newsLoadingSucceed(news)))
 		.catch((error: News.ServerError) => dispatch(newsLoadingFailure(error)));

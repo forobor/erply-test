@@ -13,15 +13,17 @@ interface Props {}
 
 const MainPage: React.FC<Props> = () => {
 	const { state: { apiToken } } = useContext(AuthContext);
-	const { state: { articles }, dispatch } = useContext(NewsContext);
+	const { state: { articles, searhQuery }, dispatch } = useContext(NewsContext);
 	const [ search, setSearch ] = useState<string>("");
 	const history = useHistory();
 
 	useEffect(
 		() => {
-			fetchNews(dispatch, apiToken);
+			if (articles.length === 0) {
+				fetchNews(dispatch, apiToken);
+			}
 		},
-		[ dispatch, apiToken ]
+		[ dispatch, apiToken, articles.length ]
 	);
 
 	const navigateToArticle = (article: News.Article) => {
@@ -52,6 +54,7 @@ const MainPage: React.FC<Props> = () => {
 					<img src={searchIcon} alt="search" />
 				</button>
 			</div>
+			{searhQuery && <h4 className="search-result">Results for: {searhQuery}</h4>}
 			{articles.length === 0 && <div className="no-result">No results...</div>}
 			{articles.map((article: News.Article, key: number) => (
 				<div
