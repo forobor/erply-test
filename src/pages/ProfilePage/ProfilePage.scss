@@ -6,6 +6,10 @@
 	padding: 0 10%;
 	box-sizing: border-box;
 
+	@include mobile-only {
+		width: 100%;
+	}
+
 	input {
 		@include input;
 		margin-bottom: 20px;

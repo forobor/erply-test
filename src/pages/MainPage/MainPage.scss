@@ -23,4 +23,8 @@
   margin-bottom: 20px;
   width: 640px;
   cursor: pointer;
+
+  @include mobile-only {
+    width: 100%;
+  }
 }

@@ -7,3 +7,9 @@
   box-sizing: border-box;
   background: transparent;
 }
+
+@mixin mobile-only {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
