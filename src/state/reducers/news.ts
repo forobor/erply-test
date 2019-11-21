@@ -76,6 +76,7 @@ export const newsReducer = (
 
 export const fetchNews = async (dispatch: Dispatch<Action>, apiKey: Auth.State["apiToken"], query?: string) => {
 	const url = query ? `${NEWS_URL_QUERY}?q=${query}` : `${NEWS_URL_TOP}`;
+	dispatch(newsLoading());
 	customFetch(url, apiKey)
 		.then((news: News.ServerData) => dispatch(newsLoadingSucceed(news)))
 		.catch((error: News.ServerError) => dispatch(newsLoadingFailure(error)));
